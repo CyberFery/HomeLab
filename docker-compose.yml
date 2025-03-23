@@ -1,0 +1,36 @@
+services:
+  metasploitable:
+    image: hackeracademy/metasploitable
+    container_name: metasploitable
+    networks:
+      - my_homelab
+    restart: unless-stopped
+
+  parrotsec:
+    image: parrotsec/security
+    container_name: parrotsec
+    networks:
+      - my_homelab
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+
+  nmap:
+    image: parrotsec/nmap
+    container_name: nmap
+    networks:
+      - my_homelab
+    restart: unless-stopped
+
+  metasploit:
+    image: parrotsec/metasploit
+    container_name: metasploit
+    networks:
+      - my_homelab
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+
+networks:
+  my_homelab:
+    driver: bridge
